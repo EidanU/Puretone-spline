@@ -1,0 +1,54 @@
+.app {
+  background: yellow;
+  height: 100%;
+  width: 100%;
+}
+
+.section-1 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: green;
+}
+
+.section-2 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  z-index: 1;
+  background-color: green;
+}
+
+.section-3 {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  background-color: green;
+}
+
+h1 {
+  text-align: center;
+  font-size: 60px;
+  color: white;
+}
+
+p {
+  font-size: 10px;
+}
+
+.scene {
+  height: 100% !important;
+  width: 100% !important;
+}
+.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
