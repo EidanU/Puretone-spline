@@ -1,13 +1,12 @@
-import { useState } from "react";
-
+import React, { useState, Suspense } from "react";
 import "./App.css";
-import Spline from "@splinetool/react-spline";
+const Spline = React.lazy(() => import("@splinetool/react-spline"));
 
 function App() {
   const [scroll, setScroll] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const handleWheel = (e) => {
-    console.log("test");
     let variation = parseInt(e.deltaY * 0.01);
     if (scroll <= 0 && variation < 0) {
       variation = 0;
@@ -15,47 +14,69 @@ function App() {
     setScroll((oldValue) => oldValue + variation);
   };
 
-  console.log("scroll", scroll);
-
   return (
-    <div className="app">
-      <div className={`section-1 ${scroll < 30 ? "show" : "hidden"}`}>
-        <h1>PureTone</h1>
-      </div>
-
-      <div
-        className={`section-2 ${
-          scroll > 180 && scroll < 240 ? "show" : "hidden"
-        }`}
-      >
-        <h1>Composants</h1>
-        <p>
-          Les écouteurs Bluetooth PureTone sont les meilleurs du marché en
-          raison de leurs composants de haute qualité. Les haut-parleurs
-          intégrés produisent un son cristallin et équilibré, grâce à leurs
-          membranes en graphène qui offrent une réponse rapide et précise. La
-          puce Bluetooth intégrée permet une connexion sans fil stable et
-          rapide, sans interruption ou décalage audio. De plus, les écouteurs
-          PureTone sont équipés d'une batterie longue durée, qui offre jusqu'à 8
-          heures d'écoute continue, et se recharge rapidement en seulement 1
-          heure grâce à la technologie de charge rapide. La qualité de
-          fabrication est également remarquable, avec des matériaux robustes et
-          durables pour une utilisation prolongée. Les écouteurs PureTone
-          offrent donc une expérience d'écoute supérieure, avec un son de haute
-          qualité, une connexion stable et rapide, une longue durée de vie de la
-          batterie et une construction solide.
-        </p>
-      </div>
-
-      <div className={`section-3 ${scroll > 410 ? "show" : "hidden"}`}>
-        <h1>Selon vos gouts</h1>
-      </div>
-
-      <Spline
-        className="scene"
-        scene="https://prod.spline.design/BZqGolZZ5yYGm8Z3/scene.splinecode"
-        onWheelCapture={handleWheel}
-      />
+    <div className="App">
+      <Suspense fallback={<div>loading app</div>}>
+        {loading ? (
+          <div className={"loadingContainer"}>
+            <div className={"loader"}>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div
+              className={`section-1 ${
+                scroll < 30 ? "showContainer" : "hiddenContainer"
+              }`}
+            >
+              <h1 className={scroll < 30 ? "showText" : "hiddentext"}>
+                PureTone
+              </h1>
+              <p className={scroll < 30 ? "showText" : "hiddentext"}>
+                Une expérience d'écoute supérieure
+              </p>
+            </div>
+            <div
+              className={`section-2 ${
+                scroll > 180 && scroll < 240
+                  ? "showContainer"
+                  : "hiddenContainer"
+              }`}
+            >
+              <h1>les meilleurs composants du marché</h1>
+              <ul>
+                <li>Un son cristallin et équilibré</li>
+                <li>Sans interruption ou décalage audio</li>
+                <li>Jusqu'à 8 heures d'écoute continue</li>
+              </ul>
+              <p></p>
+            </div>
+            <div
+              className={`section-3 ${
+                scroll > 410 ? "showContainer" : "hiddenContainer"
+              }`}
+            >
+              <h1>Selon vos gouts</h1>
+            </div>
+          </>
+        )}
+        <Spline
+          onLoad={(e) => {
+            console.log("load", e);
+            setLoading(!e.disposed);
+          }}
+          className="scene"
+          scene="https://prod.spline.design/BZqGolZZ5yYGm8Z3/scene.splinecode"
+          onWheelCapture={handleWheel}
+        />{" "}
+      </Suspense>
     </div>
   );
 }
