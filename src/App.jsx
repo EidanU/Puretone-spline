@@ -107,6 +107,7 @@ function App() {
         )}
         <Spline
           onLoad={(e) => {
+            console.log(e);
             setLoadCount((oldV) => (oldV += 1));
           }}
           className="scene"
