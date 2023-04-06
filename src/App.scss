@@ -12,6 +12,16 @@
   bottom: 20%;
   width: 100%;
   z-index: 1;
+  p {
+    text-align: center;
+  }
+  .showText {
+    transform: translate(0px, 0px);
+  }
+
+  .hiddentext {
+    transform: translate(0px, 100px);
+  }
 }
 
 .section-2 {
@@ -26,18 +36,45 @@
   justify-content: center;
   gap: 5%;
 
-  h1 {
-    background-color: #0006ff;
-    text-align: left;
-    font-size: 130px;
+  .title {
+    h1 {
+      width: fit-content;
+      padding: 20px 30px;
+      border-radius: 30px;
+      background: linear-gradient(45deg, #3b49a8, #8a5252);
+      color: white;
+      text-align: left;
+      font-size: 130px;
+    }
+    p {
+      font-size: 120px;
+      color: rgb(138, 138, 138);
+      font-weight: 900;
+      text-align: left;
+    }
+  }
+  .showText {
+    transform: translate(0, 0);
+  }
+
+  .hiddentext {
+    transform: translate(-150px, 0);
   }
 }
 
 .section-3 {
+  width: 100%;
+  top: 20%;
   position: absolute;
-  top: 0;
   z-index: 1;
-  background-color: green;
+
+  .showText {
+    transform: translate(0px, 0px);
+  }
+
+  .hiddentext {
+    transform: translate(0px, -100px);
+  }
 }
 
 .scene {
@@ -54,7 +91,7 @@
   visibility: hidden;
 }
 
-h1 {
+.gradientText {
   position: relative;
   text-align: center;
   font-size: 150px;
@@ -68,12 +105,11 @@ h1 {
 p {
   position: relative;
   font-size: 60px;
-  text-align: center;
 }
 
 ul {
   li {
-    margin-bottom: 5%;
+    margin-bottom: 4%;
     text-decoration: none;
     list-style: none;
     position: relative;
@@ -83,13 +119,11 @@ ul {
 .showText {
   opacity: 1;
   visibility: visible;
-  transform: translate(0, 0);
 }
 
 .hiddentext {
   opacity: 0;
   visibility: hidden;
-  transform: translate(0, 100px);
 }
 /*-------------------------------*/
 * {

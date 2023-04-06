@@ -4,14 +4,17 @@ const Spline = React.lazy(() => import("@splinetool/react-spline"));
 
 function App() {
   const [scroll, setScroll] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [loadCount, setLoadCount] = useState(0);
 
+  useEffect(() => {
+    loadCount > 1 && setLoading(false);
+  }, [loadCount]);
   const handleWheel = (e) => {
     let variation = parseInt(e.deltaY * 0.01);
     if ((scroll <= 0 && variation < 0) || (scroll >= 200 && variation > 0)) {
       variation = 0;
     }
-
     setScroll((oldValue) => (oldValue += variation));
   };
 
@@ -37,7 +40,11 @@ function App() {
                 scroll < 30 ? "showContainer" : "hiddenContainer"
               }`}
             >
-              <h1 className={scroll < 30 ? "showText" : "hiddentext"}>
+              <h1
+                className={`gradientText ${
+                  scroll < 30 ? "showText" : "hiddentext"
+                }`}
+              >
                 PureTone
               </h1>
               <p className={scroll < 30 ? "showText" : "hiddentext"}>
@@ -46,34 +53,28 @@ function App() {
             </div>
             <div
               className={`section-2 ${
-                scroll > 94 && scroll < 124
+                scroll > 85 && scroll < 124
                   ? "showContainer"
                   : "hiddenContainer"
               }`}
             >
-              <h1>Les meilleurs composants du marché</h1>
-              <ul>
-                <li
-                  className={` ${
-                    scroll > 94 && scroll < 124 ? "showText" : "hiddentext"
-                  }`}
-                >
-                  Un son cristallin et équilibré
-                </li>
-                <li
-                  className={` ${
-                    scroll > 94 && scroll < 124 ? "showText" : "hiddentext"
-                  }`}
-                >
-                  Sans interruption ou décalage audio
-                </li>
-                <li
-                  className={` ${
-                    scroll > 94 && scroll < 124 ? "showText" : "hiddentext"
-                  }`}
-                >
-                  Jusqu'à 8 heures d'écoute continue
-                </li>
+              <div
+                className={`title ${
+                  scroll > 85 && scroll < 124 ? "showText" : "hiddentext"
+                }`}
+              >
+                <p className={"gradientText"}>Les</p>
+                <h1>meilleurs composants</h1>
+                <p className={"gradientText"}>du marché</p>
+              </div>
+              <ul
+                className={` ${
+                  scroll > 94 && scroll < 124 ? "showText" : "hiddentext"
+                }`}
+              >
+                <li>Un son cristallin et équilibré</li>
+                <li>Sans interruption ou décalage audio</li>
+                <li>Jusqu'à 8 heures d'écoute continue</li>
               </ul>
             </div>
             <div
@@ -81,13 +82,19 @@ function App() {
                 scroll >= 200 ? "showContainer" : "hiddenContainer"
               }`}
             >
-              <h1>Selon vos gouts</h1>
+              <h1
+                className={`gradientText ${
+                  scroll >= 200 ? "showText" : "hiddentext"
+                }`}
+              >
+                Selon vos gouts
+              </h1>
             </div>
           </>
         )}
         <Spline
           onLoad={(e) => {
-            console.log("load", e);
+            setLoadCount((oldV) => (oldV += 1));
           }}
           className="scene"
           scene="https://prod.spline.design/BZqGolZZ5yYGm8Z3/scene.splinecode"
