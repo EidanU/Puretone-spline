@@ -6,11 +6,15 @@ const Spline = React.lazy(() => import("@splinetool/react-spline"));
 function App() {
   const [scroll, setScroll] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  /*
   const [loadCount, setLoadCount] = useState(0);
 
   useEffect(() => {
     loadCount > 1 && setLoading(false);
   }, [loadCount]);
+
+  */
   const handleWheel = (e) => {
     let variation = parseInt(e.deltaY * 0.01);
     if ((scroll <= 0 && variation < 0) || (scroll >= 200 && variation > 0)) {
@@ -107,8 +111,8 @@ function App() {
         )}
         <Spline
           onLoad={(e) => {
-            console.log(e);
-            setLoadCount((oldV) => (oldV += 1));
+            setLoading(false);
+            // setLoadCount((oldV) => (oldV += 1));
           }}
           className="scene"
           scene="https://prod.spline.design/BZqGolZZ5yYGm8Z3/scene.splinecode"
