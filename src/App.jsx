@@ -1,21 +1,22 @@
-import React, { useState, Suspense } from "react";
-import "./App.css";
+import React, { useState, Suspense, useEffect, useRef } from "react";
+import "./App.scss";
 const Spline = React.lazy(() => import("@splinetool/react-spline"));
 
 function App() {
   const [scroll, setScroll] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const handleWheel = (e) => {
     let variation = parseInt(e.deltaY * 0.01);
-    if (scroll <= 0 && variation < 0) {
+    if ((scroll <= 0 && variation < 0) || (scroll >= 200 && variation > 0)) {
       variation = 0;
     }
-    setScroll((oldValue) => oldValue + variation);
+
+    setScroll((oldValue) => (oldValue += variation));
   };
 
   return (
-    <div className="App">
+    <div className="App" onWheel={handleWheel}>
       <Suspense fallback={<div>loading app</div>}>
         {loading ? (
           <div className={"loadingContainer"}>
@@ -45,22 +46,39 @@ function App() {
             </div>
             <div
               className={`section-2 ${
-                scroll > 180 && scroll < 240
+                scroll > 94 && scroll < 124
                   ? "showContainer"
                   : "hiddenContainer"
               }`}
             >
-              <h1>les meilleurs composants du marché</h1>
+              <h1>Les meilleurs composants du marché</h1>
               <ul>
-                <li>Un son cristallin et équilibré</li>
-                <li>Sans interruption ou décalage audio</li>
-                <li>Jusqu'à 8 heures d'écoute continue</li>
+                <li
+                  className={` ${
+                    scroll > 94 && scroll < 124 ? "showText" : "hiddentext"
+                  }`}
+                >
+                  Un son cristallin et équilibré
+                </li>
+                <li
+                  className={` ${
+                    scroll > 94 && scroll < 124 ? "showText" : "hiddentext"
+                  }`}
+                >
+                  Sans interruption ou décalage audio
+                </li>
+                <li
+                  className={` ${
+                    scroll > 94 && scroll < 124 ? "showText" : "hiddentext"
+                  }`}
+                >
+                  Jusqu'à 8 heures d'écoute continue
+                </li>
               </ul>
-              <p></p>
             </div>
             <div
               className={`section-3 ${
-                scroll > 410 ? "showContainer" : "hiddenContainer"
+                scroll >= 200 ? "showContainer" : "hiddenContainer"
               }`}
             >
               <h1>Selon vos gouts</h1>
@@ -70,12 +88,10 @@ function App() {
         <Spline
           onLoad={(e) => {
             console.log("load", e);
-            setLoading(!e.disposed);
           }}
           className="scene"
           scene="https://prod.spline.design/BZqGolZZ5yYGm8Z3/scene.splinecode"
-          onWheelCapture={handleWheel}
-        />{" "}
+        />
       </Suspense>
     </div>
   );

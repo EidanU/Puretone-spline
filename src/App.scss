@@ -3,7 +3,6 @@
 }
 
 .App {
-  background: yellow;
   height: 100%;
   width: 100%;
 }
@@ -22,7 +21,16 @@
   width: 50%;
   height: 100%;
   z-index: 1;
-  background-color: green;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5%;
+
+  h1 {
+    background-color: #0006ff;
+    text-align: left;
+    font-size: 130px;
+  }
 }
 
 .section-3 {
@@ -30,21 +38,6 @@
   top: 0;
   z-index: 1;
   background-color: green;
-}
-
-h1 {
-  text-align: center;
-  font-size: 150px;
-  font-weight: 900;
-  font-style: normal;
-  background: -webkit-linear-gradient(45deg, #3b49a8, #8a5252);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-p {
-  font-size: 30px;
-  text-align: center;
 }
 
 .scene {
@@ -61,6 +54,32 @@ p {
   visibility: hidden;
 }
 
+h1 {
+  position: relative;
+  text-align: center;
+  font-size: 150px;
+  font-weight: 900;
+  font-style: normal;
+  background: -webkit-linear-gradient(45deg, #3b49a8, #8a5252);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p {
+  position: relative;
+  font-size: 60px;
+  text-align: center;
+}
+
+ul {
+  li {
+    margin-bottom: 5%;
+    text-decoration: none;
+    list-style: none;
+    position: relative;
+    font-size: 60px;
+  }
+}
 .showText {
   opacity: 1;
   visibility: visible;
