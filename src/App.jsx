@@ -7,14 +7,12 @@ function App() {
   const [scroll, setScroll] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  /*
   const [loadCount, setLoadCount] = useState(0);
 
   useEffect(() => {
     loadCount > 1 && setLoading(false);
   }, [loadCount]);
 
-  */
   const handleWheel = (e) => {
     let variation = parseInt(e.deltaY * 0.01);
     if ((scroll <= 0 && variation < 0) || (scroll >= 200 && variation > 0)) {
@@ -22,20 +20,24 @@ function App() {
     }
     setScroll((oldValue) => (oldValue += variation));
   };
-  console.log("scroll :", scroll);
+
+  console.log(loading);
   return (
     <div className="App" onWheel={handleWheel}>
       <Suspense fallback={<div>loading app</div>}>
         {loading ? (
           <div className={"loadingContainer"}>
-            <div className={"loader"}>
-              <span className="stroke"></span>
-              <span className="stroke"></span>
-              <span className="stroke"></span>
-              <span className="stroke"></span>
-              <span className="stroke"></span>
-              <span className="stroke"></span>
-              <span className="stroke"></span>
+            <div className="loadingContaint">
+              <div className={"loader"}>
+                <span className="stroke"></span>
+                <span className="stroke"></span>
+                <span className="stroke"></span>
+                <span className="stroke"></span>
+                <span className="stroke"></span>
+                <span className="stroke"></span>
+                <span className="stroke"></span>
+              </div>
+              <p>Loading</p>
             </div>
           </div>
         ) : (
@@ -114,8 +116,7 @@ function App() {
         )}
         <Spline
           onLoad={(e) => {
-            setLoading(false);
-            // setLoadCount((oldV) => (oldV += 1));
+            setLoadCount((oldV) => (oldV += 1));
           }}
           className="scene"
           scene="https://prod.spline.design/BZqGolZZ5yYGm8Z3/scene.splinecode"
