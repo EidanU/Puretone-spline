@@ -1,5 +1,6 @@
 import React, { useState, Suspense, useEffect, useRef } from "react";
 import "./App.scss";
+import ArrowSvg from "./assets/arrow.svg";
 const Spline = React.lazy(() => import("@splinetool/react-spline"));
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
                 Une expérience d'écoute supérieure
               </p>
             </div>
+
             <div
               className={`section-2 ${
                 scroll > 85 && scroll < 124
@@ -69,14 +71,21 @@ function App() {
               </div>
               <ul
                 className={` ${
-                  scroll > 94 && scroll < 124 ? "showText" : "hiddentext"
+                  scroll > 85 && scroll < 124 ? "showText" : "hiddentext"
                 }`}
               >
-                <li>Un son cristallin et équilibré</li>
-                <li>Sans interruption ou décalage audio</li>
-                <li>Jusqu'à 8 heures d'écoute continue</li>
+                <li>
+                  - Un son <b>cristallin et équilibré</b>
+                </li>
+                <li>
+                  - <b>Sans interruption</b> ou décalage audio
+                </li>
+                <li>
+                  - Jusqu'à <b>8 heures</b> d'écoute continue
+                </li>
               </ul>
             </div>
+
             <div
               className={`section-3 ${
                 scroll >= 200 ? "showContainer" : "hiddenContainer"
@@ -89,6 +98,10 @@ function App() {
               >
                 Selon vos gouts
               </h1>
+            </div>
+            <div className="scrollLabel">
+              <span>scroll</span>
+              <img src={ArrowSvg} />
             </div>
           </>
         )}
