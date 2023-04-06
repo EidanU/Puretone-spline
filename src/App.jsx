@@ -22,7 +22,7 @@ function App() {
     }
     setScroll((oldValue) => (oldValue += variation));
   };
-
+  console.log("scroll :", scroll);
   return (
     <div className="App" onWheel={handleWheel}>
       <Suspense fallback={<div>loading app</div>}>
@@ -105,7 +105,10 @@ function App() {
             </div>
             <div className="scrollLabel">
               <span>scroll</span>
-              <img src={ArrowSvg} />
+              <img
+                className={scroll >= 199 ? "arrowUp" : "arrowDown"}
+                src={ArrowSvg}
+              />
             </div>
           </>
         )}
