@@ -14,106 +14,102 @@ function App() {
   }, [loadCount]);
 
   const handleWheel = (e) => {
-    let variation = parseInt(e.deltaY * 0.01);
+    let variation = e.deltaY > 0 ? 1 : -1;
     if ((scroll <= 0 && variation < 0) || (scroll >= 200 && variation > 0)) {
       variation = 0;
     }
     setScroll((oldValue) => (oldValue += variation));
   };
 
-  console.log(loading);
   return (
     <div className="App" onWheel={handleWheel}>
       <Suspense fallback={<div>loading app</div>}>
-        {loading ? (
-          <div className={"loadingContainer"}>
-            <div className="loadingContaint">
-              <div className={"loader"}>
-                <span className="stroke"></span>
-                <span className="stroke"></span>
-                <span className="stroke"></span>
-                <span className="stroke"></span>
-                <span className="stroke"></span>
-                <span className="stroke"></span>
-                <span className="stroke"></span>
-              </div>
-              <p>Loading</p>
+        {/*       <div className={"loadingContainer"}>
+          <div className="loadingContaint">
+            <div className={"loader"}>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
+              <span className="stroke"></span>
             </div>
+            <p>Loading</p>
           </div>
-        ) : (
-          <>
-            <div
-              className={`section-1 ${
-                scroll < 30 ? "showContainer" : "hiddenContainer"
-              }`}
-            >
-              <h1
-                className={`gradientText ${
-                  scroll < 30 ? "showText" : "hiddentext"
-                }`}
-              >
-                PureTone
-              </h1>
-              <p className={scroll < 30 ? "showText" : "hiddentext"}>
-                Une expérience d'écoute supérieure
-              </p>
-            </div>
+        </div> */}
 
-            <div
-              className={`section-2 ${
-                scroll > 85 && scroll < 124
-                  ? "showContainer"
-                  : "hiddenContainer"
+        <>
+          <div
+            className={`section-1 ${
+              scroll < 30 ? "showContainer" : "hiddenContainer"
+            }`}
+          >
+            <h1
+              className={`gradientText ${
+                scroll < 30 ? "showText" : "hiddentext"
               }`}
             >
-              <div
-                className={`title ${
-                  scroll > 85 && scroll < 124 ? "showText" : "hiddentext"
-                }`}
-              >
-                <p className={"gradientText"}>Les</p>
-                <h1>meilleurs composants</h1>
-                <p className={"gradientText"}>du marché</p>
-              </div>
-              <ul
-                className={` ${
-                  scroll > 85 && scroll < 124 ? "showText" : "hiddentext"
-                }`}
-              >
-                <li>
-                  - Un son <b>cristallin et équilibré</b>
-                </li>
-                <li>
-                  - <b>Sans interruption</b> ou décalage audio
-                </li>
-                <li>
-                  - Jusqu'à <b>8 heures</b> d'écoute continue
-                </li>
-              </ul>
-            </div>
+              PureTone
+            </h1>
+            <p className={scroll < 30 ? "showText" : "hiddentext"}>
+              Une expérience d'écoute supérieure
+            </p>
+          </div>
 
+          <div
+            className={`section-2 ${
+              scroll > 85 && scroll < 124 ? "showContainer" : "hiddenContainer"
+            }`}
+          >
             <div
-              className={`section-3 ${
-                scroll >= 200 ? "showContainer" : "hiddenContainer"
+              className={`title ${
+                scroll > 85 && scroll < 124 ? "showText" : "hiddentext"
               }`}
             >
-              <h1
-                className={`gradientText ${
-                  scroll >= 200 ? "showText" : "hiddentext"
-                }`}
-              >
-                Selon vos gouts
-              </h1>
+              <p className={"gradientText"}>Les</p>
+              <h1>meilleurs composants</h1>
+              <p className={"gradientText"}>du marché</p>
             </div>
-            <div className="scrollLabel">
-              <span>scroll</span>
-              <img
-                className={scroll >= 199 ? "arrowUp" : "arrowDown"}
-                src={ArrowSvg}
-              />
-            </div>
-          </>
-        )}
+            <ul
+              className={` ${
+                scroll > 85 && scroll < 124 ? "showText" : "hiddentext"
+              }`}
+            >
+              <li>
+                - Un son <b>cristallin et équilibré</b>
+              </li>
+              <li>
+                - <b>Sans interruption</b> ou décalage audio
+              </li>
+              <li>
+                - Jusqu'à <b>8 heures</b> d'écoute continue
+              </li>
+            </ul>
+          </div>
+
+          <div
+            className={`section-3 ${
+              scroll >= 200 ? "showContainer" : "hiddenContainer"
+            }`}
+          >
+            <h1
+              className={`gradientText ${
+                scroll >= 200 ? "showText" : "hiddentext"
+              }`}
+            >
+              Selon vos gouts
+            </h1>
+          </div>
+          <div className="scrollLabel">
+            <span>scroll</span>
+            <img
+              className={scroll >= 199 ? "arrowUp" : "arrowDown"}
+              src={ArrowSvg}
+            />
+          </div>
+        </>
+
         <Spline
           onLoad={(e) => {
             setLoadCount((oldV) => (oldV += 1));
